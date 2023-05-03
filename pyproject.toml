@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+
+
+[project]
+name = "shikijin"
+description = "Shikijin"
+authors = [
+    {name = "osoken", email = "osoken.devel@outlook.jp"},
+]
+dynamic = [
+    "version", 
+]
+readme = "README.md"
+license = {file = "LICENSE"}
+
+dependencies = [
+    "pydantic",
+    "pyhumps",
+    "python-dateutil",
+]
+
+[project.urls]
+Source = "https://github.com/lifelong-gaming/shikijin"
+
+[tool.setuptools]
+packages=["shikijin"]
+
+[tool.setuptools.package-data]
+shikijin = ["py.typed"]
+
+[project.scripts]
+shikijin = "shikijin.cli:main"
+
+[project.optional-dependencies]
+dev=["black", "flake8", "pytest", "mypy", "tox", "isort", "pytest-mock", "pytest-cov", "freezegun", "types-python-dateutil"]
