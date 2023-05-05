@@ -18,6 +18,15 @@ class StorageType(str, Enum):
     LOCAL_FILE = "local_file"
 
 
+class LoggerType(str, Enum):
+    CONSOLE = "console"
+    FILE = "file"
+
+
+class WorkerType(str, Enum):
+    BASIC = "basic"
+
+
 class BaseSettings(_BaseSettings):
     class Config(BaseConfig):
         env_file = ".env"
@@ -30,6 +39,10 @@ class GlobalSettings(BaseSettings):
     auth_provider_settings: dict[str, Any] = {}
     storage_type: StorageType = StorageType.LOCAL_FILE
     storage_settings: dict[str, Any] = {}
+    logger_type: LoggerType = LoggerType.CONSOLE
+    logger_settings: dict[str, Any] = {}
+    worker_type: WorkerType = WorkerType.BASIC
+    worker_settings: dict[str, Any] = {}
     origins: list[str] = []
 
     class Config(BaseConfig):
