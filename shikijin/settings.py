@@ -19,7 +19,7 @@ class StorageType(str, Enum):
 
 
 class LoggerType(str, Enum):
-    CONSOLE = "console"
+    BASIC = "basic"
 
 
 class WorkerType(str, Enum):
@@ -38,7 +38,7 @@ class GlobalSettings(BaseSettings):
     auth_provider_settings: dict[str, Any] = {}
     storage_type: StorageType = StorageType.LOCAL_FILE
     storage_settings: dict[str, Any] = {}
-    logger_type: LoggerType = LoggerType.CONSOLE
+    logger_type: LoggerType = LoggerType.BASIC
     logger_settings: dict[str, Any] = {}
     worker_type: WorkerType = WorkerType.BASIC
     worker_settings: dict[str, Any] = {}
