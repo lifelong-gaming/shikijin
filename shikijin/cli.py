@@ -1,6 +1,7 @@
 from argparse import ArgumentParser
 from .settings import GlobalSettings
 from .workers.factory import WorkerFactory
+from .loggers.factory import LoggerFactory
 
 
 def generate_argument_parser() -> ArgumentParser:
@@ -19,7 +20,8 @@ def main() -> None:
         global_settings = GlobalSettings(_env_file=args.setting_file_path)
     else:
         global_settings = GlobalSettings()
+
+    logger = LoggerFactory().create(global_settings)
+
     if args.command == "worker":
-        factory = WorkerFactory()
-        worker = factory.create(global_settings)
-        worker.execute()
+        WorkerFactory(logger=logger).create(global_settings).execute()

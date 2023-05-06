@@ -20,7 +20,6 @@ class StorageType(str, Enum):
 
 class LoggerType(str, Enum):
     CONSOLE = "console"
-    FILE = "file"
 
 
 class WorkerType(str, Enum):
