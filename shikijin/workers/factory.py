@@ -1,8 +1,8 @@
-from ..base import BaseFactory
+from ..base import BaseShikijinComponentFactory
 from .settings import BaseWorkerSettings
 from .base import BaseWorker
 
 
-class WorkerFactory(BaseFactory[BaseWorkerSettings, BaseWorker]):
+class WorkerFactory(BaseShikijinComponentFactory[BaseWorker]):
     def create(self, settings: BaseWorkerSettings) -> BaseWorker:
         ...

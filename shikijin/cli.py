@@ -24,4 +24,4 @@ def main() -> None:
     logger = LoggerFactory().create(global_settings)
 
     if args.command == "worker":
-        WorkerFactory(logger=logger).create(global_settings).execute()
+        WorkerFactory(logger=logger).create(global_settings).main()
