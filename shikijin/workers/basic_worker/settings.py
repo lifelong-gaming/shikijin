@@ -1,5 +1,5 @@
 from ..settings import BaseWorkerSettings
 
 
-class BasicWorkerSetting(BaseWorkerSettings):
+class BasicWorkerSettings(BaseWorkerSettings):
     ...
