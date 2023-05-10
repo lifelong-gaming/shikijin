@@ -298,4 +298,4 @@ class ComponentName(NonEmptyString):
     """
 
     def __repr__(self) -> str:
-        return f"ComponentName({str(self).__repr__()})"
+        return f"ComponentName('{super().__str__()}')"
