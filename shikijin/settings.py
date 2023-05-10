@@ -58,4 +58,4 @@ class BaseComponentSettings(BaseSettings, metaclass=ABCMeta):
     @classmethod
     @abstractmethod
     def from_global_settings(cls: type[S], settings: GlobalSettings) -> S:
-        raise NotImplementedError
+        ...
