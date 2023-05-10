@@ -3,8 +3,9 @@ from typing import AbstractSet, Any, Dict, Optional, Union
 
 from humps import camelize
 from pydantic import BaseModel as _BaseModel
+from pydantic import Field
 
-from .fields import Serializable
+from .fields import Id, Serializable, Timestamp
 
 
 class BaseType(_BaseModel):
@@ -38,3 +39,9 @@ class BaseType(_BaseModel):
             )
             .items()
         )
+
+
+class BaseEntity(BaseType):
+    id: Id = Field(default_factory=Id.generate)
+    created_at: Timestamp = Field(default_factory=Timestamp.now)
+    updated_at: Timestamp = Field(default_factory=Timestamp.now)
