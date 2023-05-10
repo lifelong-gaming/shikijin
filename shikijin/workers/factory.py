@@ -1,7 +1,7 @@
 from ..base import BaseShikijinComponentFactory
+from ..fields import ComponentName
 from ..loggers.base import BaseLogger
 from ..settings import GlobalSettings, WorkerType
-from ..types import ComponentName
 from .base import BaseWorker
 from .basic_worker.core import BasicWorker
 from .basic_worker.settings import BasicWorkerSettings

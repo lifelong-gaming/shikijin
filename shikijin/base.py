@@ -1,8 +1,9 @@
 from abc import ABCMeta, abstractmethod
-from typing import TypeVar, Generic, Optional
-from .settings import GlobalSettings
+from typing import Generic, Optional, TypeVar
+
+from .fields import ComponentName
 from .loggers.base import BaseLogger
-from .types import ComponentName
+from .settings import GlobalSettings
 
 T = TypeVar("T", bound="BaseComponent")
 

@@ -1,45 +1,40 @@
-from collections.abc import Callable, Generator
-from typing import Any
+from collections.abc import Mapping
+from typing import AbstractSet, Any, Dict, Optional, Union
+
+from humps import camelize
+from pydantic import BaseModel as _BaseModel
+
+from .fields import Serializable
 
 
-class ComponentName(str):
-    """
-    ComponentName is a string that is not empty.
+class BaseType(_BaseModel):
+    class Config:
+        allow_mutation = False
+        alias_generator = camelize
+        allow_population_by_field_name = True
 
-    This class is used to validate the name of a component.
-
-    Example:
-        >>> from pydantic import BaseModel
-        >>> class ComponentNameTester(BaseModel):
-        ...     name: ComponentName
-        >>> ComponentNameTester(name="foo")
-        ComponentNameTester(name=ComponentName('foo'))
-        >>> ComponentNameTester(name="")
-        Traceback (most recent call last):
-         ...
-        pydantic.error_wrappers.ValidationError: 1 validation error for ComponentNameTester
-        name
-          empty string (type=value_error)
-        >>> ComponentNameTester(name=1)
-        Traceback (most recent call last):
-         ...
-        pydantic.error_wrappers.ValidationError: 1 validation error for ComponentNameTester
-        name
-          string required (type=type_error)
-
-    """
-
-    @classmethod
-    def __get_validators__(self) -> Generator[Callable[[Any], "ComponentName"], None, None]:
-        yield self._validate
-
-    @classmethod
-    def _validate(cls, v: Any) -> "ComponentName":
-        if not isinstance(v, str):
-            raise TypeError("string required")
-        if len(v) == 0:
-            raise ValueError("empty string")
-        return cls(v)
-
-    def __repr__(self) -> str:
-        return f"ComponentName({super().__repr__()})"
+    def dict(
+        self,
+        *,
+        include: Union[AbstractSet[Union[int, str]], Mapping[Union[int, str], Any], None] = None,
+        exclude: Union[AbstractSet[Union[int, str]], Mapping[Union[int, str], Any], None] = None,
+        by_alias: bool = True,
+        skip_defaults: Optional[bool] = None,
+        exclude_unset: bool = False,
+        exclude_defaults: bool = False,
+        exclude_none: bool = False,
+    ) -> Dict[str, Any]:
+        return dict(
+            (k, v.serialize() if isinstance(v, Serializable) else v)
+            for k, v in super(BaseType, self)
+            .dict(
+                include=include,
+                exclude=exclude,
+                by_alias=by_alias,
+                skip_defaults=skip_defaults,
+                exclude_unset=exclude_unset,
+                exclude_defaults=exclude_defaults,
+                exclude_none=exclude_none,
+            )
+            .items()
+        )
