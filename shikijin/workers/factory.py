@@ -1,3 +1,5 @@
+from typing import Optional
+
 from ..base import BaseShikijinComponentFactory
 from ..fields import ComponentName
 from ..loggers.base import BaseLogger
@@ -8,8 +10,8 @@ from .basic_worker.settings import BasicWorkerSettings
 
 
 class WorkerFactory(BaseShikijinComponentFactory[BaseWorker]):
-    def __init__(self, logger: BaseLogger, name: ComponentName | None = None):
-        super().__init__(logger, name)
+    def __init__(self, logger: BaseLogger, name: Optional[ComponentName] = None):
+        super(WorkerFactory, self).__init__(logger, name)
 
     def create(self, settings: GlobalSettings) -> BaseWorker:
         t = settings.worker_type

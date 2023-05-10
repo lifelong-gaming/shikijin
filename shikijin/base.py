@@ -25,7 +25,7 @@ class BaseComponent(metaclass=ABCMeta):
 
 class BaseShikijinComponent(BaseComponent, metaclass=ABCMeta):
     def __init__(self, logger: BaseLogger, name: Optional[ComponentName] = None):
-        super(self, BaseShikijinComponent).__init__(name=name)
+        super(BaseShikijinComponent, self).__init__(name=name)
         self._logger = logger
 
     @property
