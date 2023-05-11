@@ -1,5 +1,5 @@
-from ..base import BaseShikijinComponent
+from ..base import BaseShikijinComponent, EntryPointMixin
 
 
-class BaseWorker(BaseShikijinComponent):
-    pass
+class BaseWorker(BaseShikijinComponent, EntryPointMixin):
+    ...

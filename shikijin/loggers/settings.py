@@ -1,6 +1,8 @@
-from shikijin.settings import GlobalSettings
-from ..settings import BaseComponentSettings, S
 from typing import Type
+
+from shikijin.settings import GlobalSettings
+
+from ..settings import BaseComponentSettings, S
 
 
 class BaseLoggerSettings(BaseComponentSettings):

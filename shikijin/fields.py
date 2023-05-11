@@ -1,15 +1,22 @@
 import uuid
 from abc import abstractmethod
-from base64 import b64encode, standard_b64decode, standard_b64encode, urlsafe_b64decode, urlsafe_b64encode
+from base64 import (
+    b64encode,
+    standard_b64decode,
+    standard_b64encode,
+    urlsafe_b64decode,
+    urlsafe_b64encode,
+)
 from collections.abc import Callable, Generator
 from datetime import datetime as _datetime
 from datetime import timezone as _timezone
-from typing import Any, Generic, TypeVar, Union
+from typing import Any, Generic, Type, TypeVar, Union
 from uuid import UUID
 
 from dateutil.parser import parse as parse_datetime
 
 T = TypeVar("T")
+Str = TypeVar("Str", bound="NonEmptyString")
 
 
 class Serializable(Generic[T]):
@@ -255,11 +262,11 @@ class NonEmptyString(str):
     """
 
     @classmethod
-    def __get_validators__(self) -> Generator[Callable[[Any], "ComponentName"], None, None]:
-        yield self._validate
+    def __get_validators__(cls: Type[Str]) -> Generator[Callable[[Any], Str], None, None]:
+        yield cls._validate
 
     @classmethod
-    def _validate(cls, v: Any) -> "ComponentName":
+    def _validate(cls: Type[Str], v: Any) -> Str:
         if not isinstance(v, str):
             raise TypeError("string required")
         if len(v) == 0:

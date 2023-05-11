@@ -45,3 +45,11 @@ class BaseEntity(BaseType):
     id: Id = Field(default_factory=Id.generate)
     created_at: Timestamp = Field(default_factory=Timestamp.now)
     updated_at: Timestamp = Field(default_factory=Timestamp.now)
+
+
+class BaseTask(BaseEntity):
+    ...
+
+
+class Capability(BaseType):
+    ...

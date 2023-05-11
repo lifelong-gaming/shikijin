@@ -1,5 +1,2 @@
-import logging
-
-
 class BasicLogger:
     ...
