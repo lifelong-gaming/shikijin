@@ -1,5 +1,5 @@
 from collections.abc import Mapping
-from typing import AbstractSet, Any, Dict, Optional, Union
+from typing import AbstractSet, Any, Callable, Dict, Optional, Union
 
 from humps import camelize
 from pydantic import BaseModel as _BaseModel
@@ -38,6 +38,33 @@ class BaseType(_BaseModel):
                 exclude_none=exclude_none,
             )
             .items()
+        )
+
+    def json(
+        self,
+        *,
+        include: Union[AbstractSet[Union[int, str]], Mapping[Union[int, str], Any], None] = None,
+        exclude: Union[AbstractSet[Union[int, str]], Mapping[Union[int, str], Any], None] = None,
+        by_alias: bool = True,
+        skip_defaults: bool | None = None,
+        exclude_unset: bool = False,
+        exclude_defaults: bool = False,
+        exclude_none: bool = False,
+        encoder: Callable[[Any], Any] | None = None,
+        models_as_dict: bool = True,
+        **dumps_kwargs: Any,
+    ) -> str:
+        return super().json(
+            include=include,
+            exclude=exclude,
+            by_alias=by_alias,
+            skip_defaults=skip_defaults,
+            exclude_unset=exclude_unset,
+            exclude_defaults=exclude_defaults,
+            exclude_none=exclude_none,
+            encoder=encoder,
+            models_as_dict=models_as_dict,
+            **dumps_kwargs,
         )
 
 
