@@ -1,6 +1,6 @@
 from typing import Optional
 
-from ..base import BaseShikijinComponentFactory
+from ..components import BaseShikijinComponentFactory
 from ..fields import ComponentName
 from ..loggers.base import BaseLogger
 from ..settings import GlobalSettings, WorkerType

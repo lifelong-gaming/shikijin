@@ -1,4 +1,4 @@
-from ..base import BaseShikijinComponent
+from ..components import BaseShikijinComponent
 
 
 class BaseInterface(BaseShikijinComponent):
