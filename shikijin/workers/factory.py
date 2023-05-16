@@ -17,5 +17,6 @@ class WorkerFactory(BaseShikijinComponentFactory[BaseWorker]):
         t = settings.worker_type
         if t == WorkerType.BASIC:
             s = BasicWorkerSettings.from_global_settings(settings=settings)
+            self.log_info("creating worker")
             return BasicWorker(logger=self.logger, name=s.name)
         raise NotImplementedError()
