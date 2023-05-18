@@ -16,7 +16,16 @@ class BaseShikijinComponent(BaseComponent, metaclass=ABCMeta):
         return self._logger
 
     def log_info(self, message: str) -> None:
-        self.logger.info({"component_name": self.name, "message": message})
+        self.logger.info({"componentname": self.name, "message": message})
+
+    def log_warning(self, message: str) -> None:
+        self.logger.warning({"componentname": self.name, "message": message})
+
+    def log_error(self, message: str) -> None:
+        self.logger.error({"componentname": self.name, "message": message})
+
+    def log_debug(self, message: str) -> None:
+        self.logger.debug({"componentname": self.name, "message": message})
 
 
 class BaseShikijinComponentFactory(BaseShikijinComponent, BaseFactory[T], metaclass=ABCMeta):
