@@ -5,7 +5,7 @@ from humps import camelize
 from pydantic import BaseModel as _BaseModel
 from pydantic import Field
 
-from .fields import Id, Serializable, Timestamp
+from .fields import Id, Serializable, Timestamp, Bytes
 
 
 class BaseType(_BaseModel):
@@ -78,5 +78,9 @@ class BaseTask(BaseEntity):
     ...
 
 
-class Capability(BaseType):
+class BaseCapability(BaseEntity):
     ...
+
+
+class Blob(BaseEntity):
+    blob: Bytes
