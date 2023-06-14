@@ -12,4 +12,5 @@ class BasicWorker(BaseWorker):
 
     def main(self) -> None:
         print(f"hello this is {self.name}")
+
         return super().main()
