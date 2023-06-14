@@ -26,6 +26,10 @@ class WorkerType(str, Enum):
     BASIC = "basic"
 
 
+class InterfaceType(str, Enum):
+    BASIC = "basic"
+
+
 class BaseSettings(_BaseSettings):
     class Config(BaseConfig):
         env_file = ".env"
@@ -42,6 +46,8 @@ class GlobalSettings(BaseSettings):
     logger_settings: dict[str, Any] = {}
     worker_type: WorkerType = WorkerType.BASIC
     worker_settings: dict[str, Any] = {}
+    interface_type: InterfaceType = InterfaceType.BASIC
+    interface_settings: dict[str, Any] = {}
     origins: list[str] = []
 
     class Config(BaseConfig):
