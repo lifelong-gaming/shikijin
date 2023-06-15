@@ -1,4 +1,5 @@
 from abc import ABCMeta, abstractmethod
+
 from ..components import BaseShikijinComponent
 from ..fields import Id
 from ..types import Blob

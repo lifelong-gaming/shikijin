@@ -5,7 +5,7 @@ from humps import camelize
 from pydantic import BaseModel as _BaseModel
 from pydantic import Field
 
-from .fields import Id, Serializable, Timestamp, Bytes
+from .fields import Bytes, Id, Serializable, Timestamp
 
 
 class BaseType(_BaseModel):
