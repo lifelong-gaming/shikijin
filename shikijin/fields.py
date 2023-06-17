@@ -306,3 +306,33 @@ class ComponentName(NonEmptyString):
 
     def __repr__(self) -> str:
         return f"ComponentName('{super().__str__()}')"
+
+
+class TaskName(NonEmptyString):
+    """
+    TaskName is a string that is not empty.
+
+    This class is used to validate the name of a task.
+
+    Example:
+        >>> from pydantic import BaseModel
+        >>> class TaskNameTester(BaseModel):
+        ...     name: TaskName
+        >>> TaskNameTester(name="foo")
+        TaskNameTester(name=TaskName('foo'))
+        >>> TaskNameTester(name="")
+        Traceback (most recent call last):
+         ...
+        pydantic.error_wrappers.ValidationError: 1 validation error for TaskNameTester
+        name
+          empty string (type=value_error)
+        >>> TaskNameTester(name=1)
+        Traceback (most recent call last):
+         ...
+        pydantic.error_wrappers.ValidationError: 1 validation error for TaskNameTester
+        name
+          string required (type=type_error)
+    """
+
+    def __repr__(self) -> str:
+        return f"TaskName('{super().__str__()}')"
