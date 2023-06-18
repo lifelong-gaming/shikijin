@@ -9,13 +9,8 @@ from ..loggers.base import BaseLogger
 
 class BaseWorker(BaseShikijinComponent, EntryPointMixin):
     def __init__(self, interface: BaseInterface, logger: BaseLogger, name: Optional[ComponentName] = None):
-        super(BaseWorker, self).__init__(name)
-        self._logger = logger
+        super(BaseWorker, self).__init__(logger=logger, name=name)
         self._interface = interface
-
-    @property
-    def logger(self) -> BaseLogger:
-        return self._logger
 
     @property
     def interface(self) -> BaseInterface:
