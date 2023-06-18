@@ -12,4 +12,5 @@ class InterfaceFactory(BaseShikijinComponentFactory[BaseInterface]):
             self.log_info("creating interface")
             self.log_info(f"interface settings: {settings.interface_settings}")
             s = BasicInterfaceSettings.from_global_settings(settings=settings)
-            return BasicInterface(name=s.name)
+            return BasicInterface(logger=self.logger, name=s.name)
+        raise ValueError(f"unknown interface type: {t}")
