@@ -2,7 +2,7 @@ from abc import ABCMeta, abstractmethod
 
 from ..components import BaseShikijinComponent
 from ..fields import Id
-from ..types import Blob, BaseTask
+from ..types import BaseTask, Blob
 
 
 class BaseInterface(BaseShikijinComponent, metaclass=ABCMeta):
@@ -23,5 +23,5 @@ class BaseInterface(BaseShikijinComponent, metaclass=ABCMeta):
         ...
 
     @abstractmethod
-    def list_tasks(self) -> list[BaseTask]:
+    def pickup_task(self) -> BaseTask:
         ...
