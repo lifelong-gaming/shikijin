@@ -16,7 +16,8 @@ from uuid import UUID
 from dateutil.parser import parse as parse_datetime
 
 T = TypeVar("T")
-Str = TypeVar("Str", bound="NonEmptyString")
+StrT = TypeVar("StrT", bound="NonEmptyString")
+IdT = TypeVar("IdT", bound="Id")
 
 
 class Serializable(Generic[T]):
@@ -27,6 +28,7 @@ class Serializable(Generic[T]):
 
 class Id(UUID, Serializable[str]):
     r"""Id is a UUID4 type that can be used as a primary key.
+
     >>> from unittest.mock import patch
     >>> with patch("uuid.uuid4", return_value=UUID('cf57432e-809e-4353-adbd-9d5c0d733868')):
     ...     x = Id.generate()
@@ -63,7 +65,7 @@ class Id(UUID, Serializable[str]):
         super(Id, self).__init__(value)
 
     @classmethod
-    def generate(cls) -> "Id":
+    def generate(cls: Type[IdT]) -> IdT:
         return cls(uuid.uuid4().hex)
 
     @property
@@ -87,6 +89,15 @@ class Id(UUID, Serializable[str]):
         if isinstance(v, (UUID, bytes, str, int)):
             return cls(v)
         raise ValueError(f"Cannot convert {v} to {cls}")
+
+
+class ComponentId(Id):
+    """
+    ComponentId class
+
+    >>> ComponentId("z1dDLoCeQ1OtvZ1cDXM4aA")
+    ComponentId('z1dDLoCeQ1OtvZ1cDXM4aA')
+    """
 
 
 class UserId(str):
@@ -262,11 +273,11 @@ class NonEmptyString(str):
     """
 
     @classmethod
-    def __get_validators__(cls: Type[Str]) -> Generator[Callable[[Any], Str], None, None]:
+    def __get_validators__(cls: Type[StrT]) -> Generator[Callable[[Any], StrT], None, None]:
         yield cls._validate
 
     @classmethod
-    def _validate(cls: Type[Str], v: Any) -> Str:
+    def _validate(cls: Type[StrT], v: Any) -> StrT:
         if not isinstance(v, str):
             raise TypeError("string required")
         if len(v) == 0:
