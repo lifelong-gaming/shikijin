@@ -75,7 +75,8 @@ class BaseEntity(BaseType):
 
 
 class BaseTask(BaseEntity):
-    ...
+    def run(self) -> None:
+        raise NotImplementedError
 
 
 class BaseCapability(BaseEntity):
