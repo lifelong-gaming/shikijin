@@ -1,4 +1,4 @@
-from collections.abc import Mapping
+from collections.abc import Mapping, Sequence
 from typing import AbstractSet, Any, Callable, Dict, Optional, Union
 
 from humps import camelize
@@ -75,7 +75,7 @@ class BaseEntity(BaseType):
 
 
 class BaseTask(BaseEntity):
-    def run(self) -> None:
+    def run(self) -> Sequence["BaseTask"]:
         raise NotImplementedError
 
 
