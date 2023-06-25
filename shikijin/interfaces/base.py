@@ -1,8 +1,9 @@
 from abc import ABCMeta, abstractmethod
+from collections.abc import Sequence
 
 from ..components import BaseShikijinComponent
 from ..fields import ComponentId, Id
-from ..types import BaseTask, Blob
+from ..types import BaseCapability, BaseTask, Blob
 
 
 class BaseInterface(BaseShikijinComponent, metaclass=ABCMeta):
@@ -23,7 +24,7 @@ class BaseInterface(BaseShikijinComponent, metaclass=ABCMeta):
         ...
 
     @abstractmethod
-    def pickup_task(self) -> BaseTask:
+    def pickup_task(self, capabilities: Sequence[BaseCapability]) -> BaseTask:
         ...
 
     @abstractmethod

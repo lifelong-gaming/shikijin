@@ -11,6 +11,15 @@ class BasicWorker(BaseWorker):
         super(BasicWorker, self).__init__(interface=interface, logger=logger, name=name)
 
     def main(self) -> None:
-        print(f"hello this is {self.name}")
-
+        while True:
+            t = self.interface.pickup_task(self.capabilities)
+            try:
+                self.interface.signup_task(self.id, t)
+                self.logger.info(f"start {t.id}")
+                for next_task in t.run():
+                    self.interface.add_task(next_task)
+            except Exception as e:
+                self.logger.error(f"error in {self.name}({t.id}): {e}")
+            finally:
+                self.interface.signoff_task(self.id, t)
         return super().main()
