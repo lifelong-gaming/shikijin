@@ -15,6 +15,7 @@ class WorkerFactory(BaseShikijinComponentFactory[BaseWorker]):
             self.log_info(f"worker settings: {settings.worker_settings}")
             return BasicWorker(
                 interface=InterfaceFactory(logger=self.logger).create(settings=settings),
+                capabilities=s.capabilities,
                 logger=self.logger,
                 name=s.name,
             )

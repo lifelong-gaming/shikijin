@@ -1,13 +1,21 @@
+from collections.abc import Sequence
 from typing import Optional
 
 from ...fields import ComponentName
 from ...interfaces.base import BaseInterface
 from ...loggers.base import BaseLogger
+from ...types import BaseCapability
 from ..base import BaseWorker
 
 
 class BasicWorker(BaseWorker):
-    def __init__(self, interface: BaseInterface, logger: BaseLogger, name: Optional[ComponentName] = None):
+    def __init__(
+        self,
+        capabilities: Sequence[BaseCapability],
+        interface: BaseInterface,
+        logger: BaseLogger,
+        name: Optional[ComponentName] = None,
+    ):
         super(BasicWorker, self).__init__(interface=interface, logger=logger, name=name)
 
     def main(self) -> None:
