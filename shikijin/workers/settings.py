@@ -1,14 +1,14 @@
-from typing import Union
+from typing import Type, Union
 
 from ..fields import ComponentName
-from ..settings import BaseComponentSettings, GlobalSettings
+from ..settings import BaseComponentSettings, GlobalSettings, S
 
 
 class BaseWorkerSettings(BaseComponentSettings):
     name: Union[ComponentName, None] = None
 
     @classmethod
-    def from_global_settings(cls, settings: GlobalSettings) -> "BaseWorkerSettings":
+    def from_global_settings(cls: Type[S], settings: GlobalSettings) -> S:
         if "name" in settings.worker_settings:
-            return BaseWorkerSettings(name=ComponentName(settings.worker_settings["name"]))
-        return BaseWorkerSettings()
+            return cls(name=ComponentName(settings.worker_settings["name"]))
+        return cls()

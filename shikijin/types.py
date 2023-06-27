@@ -1,11 +1,22 @@
 from collections.abc import Mapping, Sequence
-from typing import AbstractSet, Any, Callable, Dict, Optional, Union
+from typing import AbstractSet, Any, Callable, Dict, Generic, Optional, Union
 
 from humps import camelize
-from pydantic import BaseModel as _BaseModel
 from pydantic import Field
+from pydantic.generics import GenericModel as _BaseModel
 
-from .fields import Bytes, Id, Serializable, Timestamp
+from .fields import (
+    AssignmentId,
+    BlobId,
+    Bytes,
+    CapabilityId,
+    IdGenerator,
+    IdT,
+    Serializable,
+    TaskId,
+    Timestamp,
+    WorkerId,
+)
 
 
 class BaseType(_BaseModel):
@@ -68,20 +79,25 @@ class BaseType(_BaseModel):
         )
 
 
-class BaseEntity(BaseType):
-    id: Id = Field(default_factory=Id.generate)
+class BaseEntity(BaseType, Generic[IdT]):
+    id: IdT = Field(default_factory=IdGenerator[IdT]())
     created_at: Timestamp = Field(default_factory=Timestamp.now)
     updated_at: Timestamp = Field(default_factory=Timestamp.now)
 
 
-class BaseTask(BaseEntity):
+class BaseTask(BaseEntity[TaskId]):
     def run(self) -> Sequence["BaseTask"]:
         raise NotImplementedError
 
 
-class BaseCapability(BaseEntity):
+class Assignment(BaseEntity[AssignmentId]):
+    worker_id: WorkerId
+    task_id: TaskId
+
+
+class BaseCapability(BaseEntity[CapabilityId]):
     ...
 
 
-class Blob(BaseEntity):
+class Blob(BaseEntity[BlobId]):
     blob: Bytes

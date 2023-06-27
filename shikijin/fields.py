@@ -10,7 +10,7 @@ from base64 import (
 from collections.abc import Callable, Generator
 from datetime import datetime as _datetime
 from datetime import timezone as _timezone
-from typing import Any, Generic, Type, TypeVar, Union
+from typing import Any, Generic, Type, TypeVar, Union, cast
 from uuid import UUID
 
 from dateutil.parser import parse as parse_datetime
@@ -91,12 +91,71 @@ class Id(UUID, Serializable[str]):
         raise ValueError(f"Cannot convert {v} to {cls}")
 
 
+class IdGenerator(Generic[IdT]):
+    def __call__(self) -> IdT:
+        return cast(IdT, Id.generate())
+
+
 class ComponentId(Id):
     """
     ComponentId class
 
     >>> ComponentId("z1dDLoCeQ1OtvZ1cDXM4aA")
     ComponentId('z1dDLoCeQ1OtvZ1cDXM4aA')
+    """
+
+
+class WorkerId(ComponentId):
+    """
+    WorkerId class
+
+    >>> WorkerId("z1dDLoCeQ1OtvZ1cDXM4aA")
+    WorkerId('z1dDLoCeQ1OtvZ1cDXM4aA')
+    """
+
+
+class InterfaceId(ComponentId):
+    """
+    InterfaceId class
+
+    >>> InterfaceId("z1dDLoCeQ1OtvZ1cDXM4aA")
+    InterfaceId('z1dDLoCeQ1OtvZ1cDXM4aA')
+    """
+
+
+class TaskId(Id):
+    """
+    TaskId class
+
+    >>> TaskId("z1dDLoCeQ1OtvZ1cDXM4aA")
+    TaskId('z1dDLoCeQ1OtvZ1cDXM4aA')
+    """
+
+
+class AssignmentId(Id):
+    """
+    AssignmentId class
+
+    >>> AssignmentId("z1dDLoCeQ1OtvZ1cDXM4aA")
+    AssignmentId('z1dDLoCeQ1OtvZ1cDXM4aA')
+    """
+
+
+class CapabilityId(Id):
+    """
+    CapabilityId class
+
+    >>> CapabilityId("z1dDLoCeQ1OtvZ1cDXM4aA")
+    CapabilityId('z1dDLoCeQ1OtvZ1cDXM4aA')
+    """
+
+
+class BlobId(Id):
+    """
+    BlobId class
+
+    >>> BlobId("z1dDLoCeQ1OtvZ1cDXM4aA")
+    BlobId('z1dDLoCeQ1OtvZ1cDXM4aA')
     """
 
 

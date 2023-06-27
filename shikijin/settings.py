@@ -2,7 +2,7 @@ import csv
 import io
 from abc import ABCMeta, abstractmethod
 from enum import Enum
-from typing import Any, TypeVar
+from typing import Any, Type, TypeVar
 
 from pydantic import BaseConfig
 from pydantic import BaseSettings as _BaseSettings
@@ -63,5 +63,5 @@ class GlobalSettings(BaseSettings):
 class BaseComponentSettings(BaseSettings, metaclass=ABCMeta):
     @classmethod
     @abstractmethod
-    def from_global_settings(cls: type[S], settings: GlobalSettings) -> S:
+    def from_global_settings(cls: Type[S], settings: GlobalSettings) -> S:
         ...

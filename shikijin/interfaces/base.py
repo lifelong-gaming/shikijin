@@ -3,7 +3,7 @@ from collections.abc import Sequence
 
 from ..components import BaseShikijinComponent
 from ..fields import ComponentId, Id
-from ..types import BaseCapability, BaseTask, Blob
+from ..types import Assignment, BaseCapability, BaseTask, Blob
 
 
 class BaseInterface(BaseShikijinComponent, metaclass=ABCMeta):
@@ -28,9 +28,13 @@ class BaseInterface(BaseShikijinComponent, metaclass=ABCMeta):
         ...
 
     @abstractmethod
-    def signup_task(self, worker_id: ComponentId, task: BaseTask) -> None:
+    def get_assignment(self, worker_id: ComponentId, task: BaseTask) -> Assignment:
         ...
 
     @abstractmethod
-    def signoff_task(self, worker_id: ComponentId, task: BaseTask) -> None:
+    def complete_assignment(self, assignment: Assignment) -> None:
+        ...
+
+    @abstractmethod
+    def abandon_assignment(self, assignment: Assignment) -> None:
         ...
