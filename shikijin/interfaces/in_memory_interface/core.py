@@ -1,5 +1,5 @@
 from ..base import BaseInterface
 
 
-class BasicInterface(BaseInterface):
+class InMemoryInterface(BaseInterface):
     ...

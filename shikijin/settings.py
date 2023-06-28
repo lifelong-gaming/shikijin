@@ -27,7 +27,7 @@ class WorkerType(str, Enum):
 
 
 class InterfaceType(str, Enum):
-    BASIC = "basic"
+    IN_MEMORY = "in_memory"
 
 
 class BaseSettings(_BaseSettings):
@@ -46,7 +46,7 @@ class GlobalSettings(BaseSettings):
     logger_settings: dict[str, Any] = {}
     worker_type: WorkerType = WorkerType.BASIC
     worker_settings: dict[str, Any] = {}
-    interface_type: InterfaceType = InterfaceType.BASIC
+    interface_type: InterfaceType = InterfaceType.IN_MEMORY
     interface_settings: dict[str, Any] = {}
     origins: list[str] = []
 
