@@ -2,13 +2,13 @@ from abc import ABCMeta, abstractmethod
 from collections.abc import Sequence
 
 from ..components import BaseShikijinComponent
-from ..fields import ComponentId, Id
+from ..fields import BlobId, ComponentId, TaskId
 from ..types import Assignment, BaseCapability, BaseTask, Blob
 
 
 class BaseInterface(BaseShikijinComponent, metaclass=ABCMeta):
     @abstractmethod
-    def get_blob(self, id: Id) -> Blob:
+    def get_blob(self, blob_id: BlobId) -> Blob:
         ...
 
     @abstractmethod
@@ -20,7 +20,7 @@ class BaseInterface(BaseShikijinComponent, metaclass=ABCMeta):
         ...
 
     @abstractmethod
-    def get_task(self, id: Id) -> BaseTask:
+    def get_task(self, task_id: TaskId) -> BaseTask:
         ...
 
     @abstractmethod
@@ -28,7 +28,7 @@ class BaseInterface(BaseShikijinComponent, metaclass=ABCMeta):
         ...
 
     @abstractmethod
-    def get_assignment(self, worker_id: ComponentId, task: BaseTask) -> Assignment:
+    def create_assignment(self, worker_id: ComponentId, task: BaseTask) -> Assignment:
         ...
 
     @abstractmethod
