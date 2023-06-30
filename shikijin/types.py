@@ -86,8 +86,7 @@ class BaseEntity(BaseType, Generic[IdT]):
 
 
 class BaseTask(BaseEntity[TaskId]):
-    def run(self) -> Sequence["BaseTask"]:
-        raise NotImplementedError
+    ...
 
 
 class Assignment(BaseEntity[AssignmentId]):
