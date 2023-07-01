@@ -1,4 +1,4 @@
-from collections.abc import Mapping, Sequence
+from collections.abc import Mapping
 from typing import AbstractSet, Any, Callable, Dict, Generic, Optional, Union
 
 from humps import camelize
